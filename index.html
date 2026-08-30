@@ -3,15 +3,451 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CKR Finds</title>
-<style>
-  body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;box-sizing:border-box;}
-  h1{font-size:2.5rem;letter-spacing:2px;margin-bottom:10px;color:#d4af37;}
-  p{color:#aaa;max-width:420px;}
-</style>
+<title>CKR Finds — Cosas que sí sirven</title>
+<meta name="description" content="Objetos de casa, de temporada y de bienestar elegidos por un solo criterio: que resuelvan algo real. Envíos a toda Colombia."/>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <h1>CKR FINDS</h1>
-  <p>Muy pronto abrimos esta tienda. Estamos preparando todo para ti.</p>
+
+<nav class="navbar">
+  <div class="wrap">
+    <a href="/" class="brand">
+      <span class="mark">CKR Finds</span>
+      <span class="of">una curaduría de CKR</span>
+    </a>
+    <div class="nav-links">
+      <a href="#catalogo">Hogar &amp; Navidad</a>
+      <a href="#bienestar">Bienestar</a>
+      <a href="#" class="soon">Belleza — próximamente</a>
+      <button class="cart-icon-btn" onclick="openCart()" aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-13z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+        <span class="cart-badge" id="cartBadge"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Lanzamiento 2026</div>
+    <h1>Cosas que <em>sirven</em>, no solo que se ven bien en un video.</h1>
+    <p>Objetos de casa, de temporada y de bienestar elegidos por un solo criterio: que resuelvan algo real. Envíos a toda Colombia, pagos en COP.</p>
+  </section>
+
+  <div class="section-head" id="catalogo">
+    <h2>Hogar &amp; Navidad</h2>
+    <span>8 productos</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">Tendencia 2026</span>
+        <img src="images/arbol-verde.webp" alt="Árbol de Navidad verde clásico de 210cm"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Árbol de Navidad Verde</p>
+        <p class="product-hook">210cm de altura, verde clásico — la pieza central de la sala.</p>
+        <p class="product-desc">Árbol artificial de 2.10 metros de altura, verde clásico con ramas densas y puntas de rama realistas.</p>
+        <ul class="product-benefits">
+          <li>210cm de altura</li>
+          <li>Verde clásico, ramas densas</li>
+          <li>Empaque compacto, fácil de guardar</li>
+        </ul>
+        <p class="product-price">$350.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Árbol de Navidad Verde', 350000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">Tendencia 2026</span>
+        <img src="images/arbol-nevado.jpg" alt="Árbol de Navidad nevado de 210cm con base metálica"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Árbol de Navidad Nevado</p>
+        <p class="product-hook">210cm, efecto nevado con 900 ramas — la pieza central de la sala.</p>
+        <p class="product-desc">Árbol artificial de 2.10 metros con efecto nevado, 900 ramas y base metálica plegable. Se arma en minutos conectando las 3 secciones del tronco.</p>
+        <ul class="product-benefits">
+          <li>210cm de altura, 900 ramas</li>
+          <li>Efecto nevado realista</li>
+          <li>Base metálica plegable, armado en minutos</li>
+          <li>3 secciones de tronco, fácil de guardar</li>
+        </ul>
+        <p class="product-price">$500.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Árbol de Navidad Nevado', 500000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">Match Home Depot</span>
+        <img src="images/reno.webp" alt="Familia de renos con luces LED"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Familia de renos con luces LED</p>
+        <p class="product-hook">El clásico de las terrazas navideñas — Buck, Doe y cervatillo.</p>
+        <p class="product-desc">Set de 3 figuras de renos (Buck, Doe y cervatillo) con luces LED integradas, ideal para decorar terraza, jardín o entrada — el mismo estilo que se ve en las casas de revista.</p>
+        <ul class="product-benefits">
+          <li>Set completo de 3 figuras</li>
+          <li>Luces LED integradas</li>
+          <li>Resistente para uso en exterior</li>
+          <li>Estilo clásico navideño americano</li>
+        </ul>
+        <p class="product-price">$299.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Familia de renos con luces LED', 299000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">4.6★ · envío gratis</span>
+        <img src="images/cajas-regalo-navidad.jpg" alt="Set de 3 cajas de regalo iluminadas con luces LED para decoración navideña"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Cajas de Regalo Iluminadas</p>
+        <p class="product-hook">Set de 3 cajas con luces LED cálidas y moño rojo — para árbol, entrada o mesa.</p>
+        <p class="product-desc">Set de 3 cajas de regalo decorativas en distintos tamaños, con luces LED cálidas integradas y moño de tela rojo. Ideales como adorno de falda de árbol de Navidad, entrada o mesa central.</p>
+        <ul class="product-benefits">
+          <li>Set completo de 3 tamaños</li>
+          <li>Luces LED cálidas integradas</li>
+          <li>Moño de tela, no se destiñe</li>
+          <li>Reutilizable cada temporada</li>
+        </ul>
+        <p class="product-price">$90.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Cajas de Regalo Iluminadas', 90000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">2 baterías · 48V</span>
+        <img src="images/hidrolavadora.webp" alt="Hidrolavadora inalámbrica a batería con manguera, boquillas metálicas y botella de espuma"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Hidrolavadora Inalámbrica</p>
+        <p class="product-hook">Sin cables, hasta 45 min de uso continuo — para carro, terraza y jardín.</p>
+        <p class="product-desc">Lavadora a presión portátil e inalámbrica, batería de litio con hasta 45 minutos de uso continuo. Incluye manguera con filtro para succionar de baldes, tanques o piscina, 6 boquillas metálicas intercambiables y botella dosificadora de espuma.</p>
+        <ul class="product-benefits">
+          <li>Incluye 2 baterías de litio + cargador</li>
+          <li>Manguera con filtro, succiona de balde/tanque/piscina</li>
+          <li>6 modos de boquilla, incluye modo espuma</li>
+          <li>Compacta y liviana, sin restricción de cables</li>
+        </ul>
+        <p class="product-price">$100.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Hidrolavadora Inalámbrica', 100000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">12 frascos · 2 niveles</span>
+        <img src="images/especiero-2niveles.jpg" alt="Especiero giratorio de 2 niveles con 12 frascos, base cromada"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Especiero Giratorio 2 Niveles</p>
+        <p class="product-hook">12 frascos en 2 niveles, base giratoria 360° — diseño elegante para tu cocina.</p>
+        <p class="product-desc">Especiero de diseño elegante en negro, con capacidad para 12 frascos en 2 niveles. Base giratoria 360° de acrílico, plástico y aluminio, con dosificación ajustable en 4 modos. 33cm de alto x 16cm de base.</p>
+        <ul class="product-benefits">
+          <li>12 frascos para especias secas, 2 niveles</li>
+          <li>Base giratoria 360°, acceso rápido</li>
+          <li>Dosificación ajustable en 4 modos</li>
+          <li>Incluye soporte para toallas de papel</li>
+        </ul>
+        <p class="product-price">$99.900<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Especiero Giratorio 2 Niveles', 99900)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">150cm · con maceta</span>
+        <img src="images/bonsai-cerezo.jpg" alt="Bonsái de cerezo artificial de 150cm con maceta"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Bonsái de Cerezo Artificial</p>
+        <p class="product-hook">150cm, flores de cerezo con maceta incluida — elegancia sin mantenimiento.</p>
+        <p class="product-desc">Bonsái de cerezo artificial de 150cm de altura, con cuenco decorativo incluido. Fabricado en plástico resistente, no se marchita ni requiere riego — listo para colocar en cualquier rincón del hogar.</p>
+        <ul class="product-benefits">
+          <li>150cm de altura, incluye maceta</li>
+          <li>No requiere riego ni mantenimiento</li>
+          <li>Material resistente, no se marchita</li>
+          <li>Ideal para sala, entrada o eventos</li>
+        </ul>
+        <p class="product-price">$1.200.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Bonsái de Cerezo Artificial', 1200000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">4.5★ · 1.000+ vendidos</span>
+        <img src="images/gorro-migrana.jpg" alt="Gorro de gel para frío o calor, alivio de migrañas y dolores de cabeza"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Gorro de gel para migraña</p>
+        <p class="product-hook">Terapia de frío y calor para cabeza, sienes y ojos — alivio rápido, reutilizable.</p>
+        <p class="product-desc">Gorro de gel de una sola capa, apto para frío (refrigerador) o calor (microondas 1-2 min). Cubre cabeza, sienes y ojos en una sola pieza — 22cm x 17cm, nylon + gel.</p>
+        <ul class="product-benefits">
+          <li>Sirve para frío y para calor</li>
+          <li>Alivia migraña, dolor de cabeza, estrés y ojos hinchados</li>
+          <li>Con calor: ayuda a disminuir congestión y rinitis</li>
+          <li>Compresión elástica, se adapta a cualquier forma de cabeza</li>
+        </ul>
+        <p class="product-price">$35.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Gorro de gel para migraña', 35000)">Agregar al carrito</button>
+        <div class="product-reviews">
+          <p class="stars-row">★★★★★ 4.5 <span>· 186 valoraciones</span></p>
+          <p class="review-quote">"Muy buen producto, ni tuve que meterlo en el refri y ya la parte del gel se sentía frío, ajusta muy bien, se siente un alivio instantáneo."<cite>Reseña verificada del producto</cite></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head" id="bienestar">
+    <h2>Bienestar</h2>
+    <span>7 productos</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">Registro INVIMA</span>
+        <img src="images/magnesio-invima.jpg" alt="Vital World Magnesium 12-in-1 Complex con registro INVIMA, hecho en USA"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Magnesio 12 en 1 (INVIMA)</p>
+        <p class="product-hook">12 tipos de magnesio + vitamina C, hecho en USA — proveedor local, entrega rápida.</p>
+        <p class="product-desc">Fórmula de gelatina blanda con relleno líquido a base de magnesio: 12 formas distintas (bisglicinato, citrato, malato, taurato, entre otras) más vitamina C, hecho en USA.</p>
+        <ul class="product-benefits">
+          <li>12 formas de magnesio en una sola cápsula</li>
+          <li>Sin soya, sin gluten, sin azúcares añadidos</li>
+          <li>100 unidades · 50 porciones</li>
+          <li>Con registro sanitario INVIMA</li>
+        </ul>
+        <p class="product-price">$50.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Magnesio 12 en 1 (INVIMA)', 50000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">En polvo · 900g</span>
+        <img src="images/creatina.jpg" alt="Creatina monohidratada pura en polvo, 2 tarros de 450 gramos"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Creatina Monohidratada Pura</p>
+        <p class="product-hook">En polvo, 2 tarros x 450g — para entrenamiento de fuerza.</p>
+        <p class="product-desc">Diseñada para adultos a partir de 18 años, esta creatina es perfecta para deportistas y entusiastas — aprovecha al máximo cada sesión de entrenamiento.</p>
+        <ul class="product-benefits">
+          <li>2 tarros x 450g (900g total)</li>
+          <li>En polvo, fácil de mezclar</li>
+          <li>Apoya fuerza y rendimiento</li>
+          <li>Uso diario recomendado</li>
+        </ul>
+        <p class="product-price">$280.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Creatina Monohidratada Pura', 280000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">5.0★ · envío gratis</span>
+        <img src="images/gomitas-creatina.webp" alt="Gomitas de proteína con creatina y colágeno, 60 gomitas"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Gomitas Proteína + Creatina + Colágeno</p>
+        <p class="product-hook">12g de proteína y 2g de creatina por porción, sin azúcar — sin batidos.</p>
+        <p class="product-desc">Gomitas con 12g de proteína y 2g de creatina por porción, más colágeno y ácido hialurónico. Sabor a frutos rojos, sin azúcar añadida.</p>
+        <ul class="product-benefits">
+          <li>12g proteína + 2g creatina por porción</li>
+          <li>Incluye colágeno y ácido hialurónico</li>
+          <li>Sin azúcar añadida</li>
+          <li>Fácil de tomar, sin polvos ni cápsulas</li>
+        </ul>
+        <p class="product-price">$130.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Gomitas Proteína + Creatina + Colágeno', 130000)">Agregar al carrito</button>
+        <div class="product-reviews">
+          <p class="stars-row">★★★★★ 5.0 <span>· 6 valoraciones</span></p>
+          <p class="review-quote">"Me encanta este suplemento de proteína en gomitas. Cada porción aporta 12g de proteína y 2g de creatina. El sabor a frutos rojos es delicioso, sin azúcar añadida. Ideal para los amantes del fitness."<cite>Reseña verificada del producto</cite></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">Combo · proveedor local</span>
+        <img src="images/combo-creatina-uro.jpg" alt="Combo Creatina For Women y Uro Vaginal Probiotic, 60 cápsulas"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Combo Creatina For Women + Uro</p>
+        <p class="product-hook">Creatina para mujer y probiótico vaginal (60 cápsulas) — salud íntima y fuerza en un combo.</p>
+        <p class="product-desc">Combo 2 en 1: creatina formulada para mujer más Uro, probiótico vaginal en cápsulas veganas — fuerza física y salud íntima en un solo pedido.</p>
+        <ul class="product-benefits">
+          <li>Creatina formulada específicamente para mujer</li>
+          <li>Uro apoya pH, flora y olor vaginal</li>
+          <li>60 cápsulas veganas</li>
+          <li>2 productos en un solo combo</li>
+        </ul>
+        <p class="product-price">$70.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Combo Creatina For Women + Uro', 70000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">1500mg · 100 softgels</span>
+        <img src="images/nad-resveratrol.jpg" alt="NAD+ Resveratrol Ultra Strength Liposomal, 100 softgels, hecho en USA"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">NAD+ Resveratrol</p>
+        <p class="product-hook">Fórmula liposomal para salud celular y energía — 1500mg por porción, hecho en USA.</p>
+        <p class="product-desc">Fórmula liposomal Ultra Strength con NAD+ y resveratrol, 1500mg por porción, hecho en USA — pensada para apoyar la energía y la salud celular.</p>
+        <ul class="product-benefits">
+          <li>Tecnología liposomal, mejor absorción</li>
+          <li>100 softgels</li>
+          <li>Non-GMO y vegano</li>
+          <li>Hecho en USA</li>
+        </ul>
+        <p class="product-price">$79.990<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('NAD+ Resveratrol', 79990)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">1300mg · 100 softgels</span>
+        <img src="images/omega3.jpg" alt="Active Plus Omega 3 1300mg, 100 softgels, hecho en USA, salud cardíaca y cerebral"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Omega 3 Americano</p>
+        <p class="product-hook">1300mg, salud cardíaca, cerebral e inmune — hecho en USA.</p>
+        <p class="product-desc">Omega 3 Ultra Strength 1300mg, aceite de pescado de mar profundo, hecho en USA — pensado para apoyar la salud del corazón, el cerebro y el sistema inmune.</p>
+        <ul class="product-benefits">
+          <li>Reduce el riesgo cardiovascular</li>
+          <li>Apoya la función cerebral y la memoria</li>
+          <li>Efecto antiinflamatorio</li>
+          <li>Ayuda al sistema nervioso</li>
+        </ul>
+        <p class="product-price">$75.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Omega 3 Americano', 75000)">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="badge">4.6★ · 1.000+ vendidos</span>
+        <img src="images/crema-hemorroides.jpg" alt="Crema DICTAMNI para hemorroides, pack de 3 unidades"/>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Crema para Hemorroides</p>
+        <p class="product-hook">Alivio rápido, antiinflamatorio — pack de 3 unidades.</p>
+        <p class="product-desc">Crema DICTAMNI para hemorroides, con efecto antiinflamatorio y hemostático — alivia el dolor, la hinchazón y el sangrado rectal. Pack de 3 unidades.</p>
+        <ul class="product-benefits">
+          <li>Alivio rápido del dolor y la hinchazón</li>
+          <li>Efecto antiinflamatorio y hemostático</li>
+          <li>Aplicación tópica, fácil de usar</li>
+          <li>Pack de 3 unidades</li>
+        </ul>
+        <p class="product-price">$60.000<small>COP</small></p>
+        <button class="btn-agregar" onclick="addToCart('Crema para Hemorroides', 60000)">Agregar al carrito</button>
+        <div class="product-reviews">
+          <p class="stars-row">★★★★★ 4.6 <span>· 108 valoraciones</span></p>
+          <p class="review-quote">"Este ungüento es un milagro. Sufría de hemorroides y usé tres tubos tres veces al día — literalmente curó mis hemorroides. Lo recomiendo mucho."<cite>Reseña verificada del producto</cite></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="note">© 2026 CKR Finds · una curaduría de <b>CKR</b></span>
+    <a class="wa-link" href="https://wa.me/573017604292" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-2.99.79.8-2.92-.19-.3A7.93 7.93 0 1 1 12 20Z"/></svg>
+      Escríbenos por WhatsApp
+    </a>
+  </div>
+</footer>
+
+<!-- ---- TOAST ---- -->
+<div class="toast" id="cartToast">Agregado al carrito</div>
+
+<!-- ---- CART DRAWER ---- -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" onclick="closeCart()" aria-label="Cerrar">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">$0 COP</span>
+    </div>
+    <button class="btn-checkout" onclick="checkoutWompi()">Pagar con Wompi</button>
+    <p class="checkout-note">Pago seguro con tarjeta, PSE o Nequi. Coordinamos el envío por WhatsApp después de tu compra.</p>
+  </div>
+</div>
+
+<!-- ---- MODAL: DATOS DEL CLIENTE ---- -->
+<div class="modal-overlay" id="customerFormModal">
+  <div class="modal-box">
+    <h2>Datos de envío</h2>
+    <p>Los necesitamos para coordinar tu pedido después del pago.</p>
+    <div class="form-row">
+      <label for="cf-nombre">Nombre completo</label>
+      <input type="text" id="cf-nombre" placeholder="Tu nombre"/>
+    </div>
+    <div class="form-row">
+      <label for="cf-email">Correo</label>
+      <input type="email" id="cf-email" placeholder="tucorreo@ejemplo.com"/>
+    </div>
+    <div class="form-row">
+      <label for="cf-tel">Teléfono / WhatsApp</label>
+      <input type="tel" id="cf-tel" placeholder="300 000 0000"/>
+    </div>
+    <div class="form-row">
+      <label for="cf-dir">Dirección</label>
+      <input type="text" id="cf-dir" placeholder="Calle, número, apartamento"/>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label for="cf-ciudad">Ciudad</label>
+        <input type="text" id="cf-ciudad" placeholder="Ciudad"/>
+      </div>
+      <div class="form-row">
+        <label for="cf-depto">Departamento</label>
+        <input type="text" id="cf-depto" placeholder="Departamento"/>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeCustomerForm()">Cancelar</button>
+      <button class="btn-primary" onclick="submitCustomerForm()">Continuar al pago</button>
+    </div>
+  </div>
+</div>
+
+<!-- ---- MODAL: PAGO EXITOSO ---- -->
+<div class="modal-overlay" id="wompiSuccessModal">
+  <div class="modal-box success">
+    <div class="success-icon">✓</div>
+    <h2>¡Pago exitoso!</h2>
+    <p>Gracias por tu compra. Confírmanos tu pedido por WhatsApp para coordinar el envío.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeSuccessModal()">Cerrar</button>
+      <a class="btn-primary" id="wompiSuccessWaBtn" href="https://wa.me/573017604292" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">Confirmar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
 </body>
 </html>
