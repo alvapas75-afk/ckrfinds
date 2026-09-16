@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu pedido con Addi — CKR Finds</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #12211C;
+    color: #F2EEE1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card {
+    background: #1C2F27;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 18px 40px -20px rgba(0,0,0,0.55);
+  }
+  .icon { font-size: 3.2rem; margin-bottom: 10px; }
+  h1 { font-size: 1.4rem; margin: 10px 0 14px; color: #F2EEE1; }
+  p { line-height: 1.5; color: #A2B6A9; margin: 0 0 10px; }
+  .order-id { font-size: 0.8rem; color: #7c9186; margin-top: 18px; word-break: break-all; }
+  a.btn {
+    display: inline-block;
+    margin-top: 24px;
+    background: #CCA05A;
+    color: #20180A;
+    text-decoration: none;
+    padding: 13px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+  }
+  a.btn:hover { background: #dcae66; }
+  a.wsp {
+    display: inline-block;
+    margin-top: 12px;
+    color: #F2EEE1;
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon" id="icon">⏳</div>
+    <h1 id="titulo">Procesando tu solicitud con Addi...</h1>
+    <p id="mensaje">Estamos confirmando el estado de tu crédito. Esto puede tardar unos segundos.</p>
+    <div id="orderBox" class="order-id" style="display:none">Referencia de pedido: <span id="orderIdSpan"></span></div>
+    <a class="btn" href="https://ckrfinds.ckrnow.com/">Volver a la tienda</a>
+    <br>
+    <a class="wsp" href="https://wa.me/573017604292" target="_blank">¿Tienes dudas? Escríbenos por WhatsApp</a>
+  </div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('orderId');
+  const status = (params.get('status') || params.get('applicationStatus') || '').toUpperCase();
+
+  const icon = document.getElementById('icon');
+  const titulo = document.getElementById('titulo');
+  const mensaje = document.getElementById('mensaje');
+
+  if (orderId) {
+    document.getElementById('orderBox').style.display = 'block';
+    document.getElementById('orderIdSpan').textContent = orderId;
+  }
+
+  if (status === 'APPROVED') {
+    icon.textContent = '🎉';
+    titulo.textContent = '¡Tu crédito con Addi fue aprobado!';
+    mensaje.textContent = 'Gracias por tu compra en CKR Finds. Ya estamos coordinando tu pedido con el proveedor y te avisaremos por WhatsApp con los tiempos de entrega.';
+  } else if (status === 'REJECTED' || status === 'DECLINED') {
+    icon.textContent = '😕';
+    titulo.textContent = 'Tu solicitud no fue aprobada esta vez';
+    mensaje.textContent = 'No te preocupes, puedes intentar con otro método de pago (Wompi: tarjeta, PSE o Nequi) desde nuestra tienda.';
+  } else if (status === 'ABANDONED' || status === 'PENDING' || status === '') {
+    icon.textContent = '⏳';
+    titulo.textContent = 'Estamos confirmando tu solicitud';
+    mensaje.textContent = 'Addi está terminando de procesar tu decisión de crédito. Si ya recibiste una respuesta en Addi y aquí no se refleja, escríbenos por WhatsApp con tu referencia de pedido.';
+  } else {
+    icon.textContent = 'ℹ️';
+    titulo.textContent = 'Gracias por tu solicitud con Addi';
+    mensaje.textContent = 'Te avisaremos por correo o WhatsApp en cuanto tengamos el resultado final de tu crédito.';
+  }
+</script>
+</body>
+</html>

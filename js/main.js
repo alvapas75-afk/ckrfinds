@@ -1,4 +1,8 @@
-// ===== CKR FINDS — Carrito de compras + Checkout Wompi =====
+// ===== CKR FINDS — Carrito de compras + Checkout Wompi / Addi =====
+
+// ===== ADDI — CONFIGURACIÓN =====
+const ADDI_ALLY_SLUG = 'ckrboutique-ecommerce';
+const CKR_STOCK_WEBHOOK = 'https://script.google.com/macros/s/AKfycbwg9Exn5g-aEe3hpP3-MCHZz-mAUKXYve_FU1Sha7xwSbhLy7B6eWnvf1XrcrF29bs/exec';
 
 let cart = JSON.parse(localStorage.getItem('ckrfinds_cart') || '[]');
 
@@ -107,16 +111,26 @@ function closeCart() {
 }
 
 // ---- FORMULARIO DE DATOS DEL CLIENTE ----
-function showCustomerForm() {
+let _checkoutCallback = null;
+let _checkoutRequiereCedula = false;
+
+function showCustomerForm(callback, requiereCedula) {
+  _checkoutCallback = callback;
+  _checkoutRequiereCedula = !!requiereCedula;
+  const cedulaField = document.getElementById('cf-cedula-field');
+  if (cedulaField) cedulaField.style.display = _checkoutRequiereCedula ? 'block' : 'none';
   document.getElementById('customerFormModal').style.display = 'flex';
 }
 
 function closeCustomerForm() {
   document.getElementById('customerFormModal').style.display = 'none';
+  _checkoutCallback = null;
 }
 
 function submitCustomerForm() {
   const nombre = document.getElementById('cf-nombre').value.trim();
+  const cedulaInput = document.getElementById('cf-cedula');
+  const cedula = cedulaInput ? cedulaInput.value.trim() : '';
   const email  = document.getElementById('cf-email').value.trim();
   const tel    = document.getElementById('cf-tel').value.trim();
   const dir    = document.getElementById('cf-dir').value.trim();
@@ -126,8 +140,13 @@ function submitCustomerForm() {
     alert('Por favor completa todos los campos para continuar.');
     return;
   }
+  if (_checkoutRequiereCedula && !cedula) {
+    alert('Para pagar con Addi necesitamos tu número de cédula.');
+    return;
+  }
+  const callback = _checkoutCallback; // guardar antes de cerrar, closeCustomerForm() lo pone en null
   closeCustomerForm();
-  iniciarPagoWompi({ nombre, email, tel, dir, ciudad, depto });
+  if (callback) callback({ nombre, cedula, email, tel, dir, ciudad, depto });
 }
 
 // ---- NOTIFICAR PEDIDO POR WHATSAPP (para que CKR haga el pedido manual al proveedor) ----
@@ -158,7 +177,89 @@ function checkoutWompi() {
     return;
   }
   closeCart();
-  showCustomerForm();
+  showCustomerForm(({ nombre, email, tel, dir, ciudad, depto }) => {
+    iniciarPagoWompi({ nombre, email, tel, dir, ciudad, depto });
+  });
+}
+
+// ---- CHECKOUT CON ADDI (directo en la página — redirige a Addi a decidir el crédito) ----
+function checkoutAddi() {
+  if (cart.length === 0) {
+    alert('Tu carrito está vacío. Agrega productos primero.');
+    return;
+  }
+  closeCart();
+  showCustomerForm(({ nombre, cedula, email, tel, dir, ciudad, depto }) => {
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const pedido = {
+      tienda: 'ckrfinds',
+      cliente: { nombre, cedula, email, tel, dir, ciudad, depto },
+      items: cart.map(i => ({ nombre: i.name, qty: i.qty, precio: i.price })),
+      total
+    };
+    addiIniciarCheckout(pedido);
+  }, true); // true = requiere cédula
+}
+
+// Llama al backend (Apps Script, compartido con ckrnow.com) para crear la
+// transacción en Addi y redirige al cliente a la página de Addi donde decide
+// si acepta el crédito. Se usa JSONP (script dinámico) porque las respuestas
+// de Apps Script no traen headers CORS legibles desde el navegador.
+function addiIniciarCheckout(pedido) {
+  const overlay = document.createElement('div');
+  overlay.id = 'addi-loading-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;text-align:center;padding:20px;';
+  overlay.innerHTML = '<div>⏳ Conectando con Addi...<br><small style="opacity:.8">No cierres esta ventana</small></div>';
+  document.body.appendChild(overlay);
+
+  const cbName = 'addiCb_' + Date.now();
+  const cleanup = () => {
+    const s = document.getElementById(cbName + '_script');
+    if (s) s.remove();
+    delete window[cbName];
+    overlay.remove();
+  };
+
+  window[cbName] = function (res) {
+    cleanup();
+    if (res && res.ok && res.redirectUrl) {
+      window.location.href = res.redirectUrl;
+    } else {
+      alert((res && res.error) || 'No se pudo iniciar el pago con Addi. Intenta de nuevo o elige otro método.');
+    }
+  };
+
+  const script = document.createElement('script');
+  script.id = cbName + '_script';
+  script.src = CKR_STOCK_WEBHOOK + '?accion=addi_crear_transaccion'
+    + '&callback=' + encodeURIComponent(cbName)
+    + '&pedido=' + encodeURIComponent(JSON.stringify(pedido));
+  script.onerror = () => { cleanup(); alert('No se pudo conectar con Addi. Revisa tu conexión e intenta de nuevo.'); };
+  document.body.appendChild(script);
+
+  // Salvavidas: si Addi/Apps Script no responde en 20s, no dejar al cliente esperando para siempre.
+  setTimeout(() => {
+    if (window[cbName]) { cleanup(); alert('Addi está tardando demasiado en responder. Intenta de nuevo en un momento.'); }
+  }, 20000);
+}
+
+// ---- WIDGET DE CUOTAS ADDI EN PRODUCTOS ----
+function parsePrice(priceText) {
+  return parseInt(priceText.replace(/\./g, '').replace(/\D/g, ''), 10);
+}
+
+function injectAddiWidgets() {
+  document.querySelectorAll('.product-info').forEach(info => {
+    const priceEl = info.querySelector('.product-price');
+    if (!priceEl || info.querySelector('addi-widget')) return;
+    const price = parsePrice(priceEl.textContent);
+    if (!price || price < 100000) return;
+    const widget = document.createElement('addi-widget');
+    widget.setAttribute('price', String(price));
+    widget.setAttribute('ally-slug', ADDI_ALLY_SLUG);
+    widget.className = 'addi-cuotas';
+    priceEl.insertAdjacentElement('afterend', widget);
+  });
 }
 
 async function iniciarPagoWompi({ nombre, email, tel, dir, ciudad, depto }) {
@@ -215,4 +316,5 @@ window.addEventListener('DOMContentLoaded', () => {
     history.replaceState({}, '', '/');
   }
   updateCartBadge();
+  injectAddiWidgets();
 });

@@ -170,9 +170,17 @@ footer .wa-link{
 .cart-total-row span:last-child{font-variant-numeric:tabular-nums;color:var(--accent);}
 .btn-checkout{
   width:100%;padding:14px;border:none;border-radius:10px;background:var(--accent);
-  color:var(--accent-ink);font-weight:700;font-size:.92rem;cursor:pointer;
+  color:var(--accent-ink);font-weight:700;font-size:.92rem;cursor:pointer;margin-bottom:10px;
 }
+.btn-checkout-addi{
+  width:100%;padding:14px;border:none;border-radius:10px;background:#FF5A00;
+  color:#fff;font-weight:700;font-size:.92rem;cursor:pointer;
+}
+.btn-checkout-addi:hover{background:#e04e00;}
 .checkout-note{font-size:.72rem;color:var(--sub);text-align:center;margin-top:10px;line-height:1.5;}
+
+/* ===== ADDI WIDGET — Cuotas en producto ===== */
+addi-widget.addi-cuotas{display:block;margin-bottom:10px;font-size:.78rem;}
 
 /* ---- MODALS (customer form / success) ---- */
 .modal-overlay{

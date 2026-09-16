@@ -6,6 +6,8 @@
 <title>CKR Finds — Cosas que sí sirven</title>
 <meta name="description" content="Objetos de casa, de temporada y de bienestar elegidos por un solo criterio: que resuelvan algo real. Envíos a toda Colombia."/>
 <link rel="stylesheet" href="css/style.css"/>
+<!-- Addi Widget — muestra cuotas en cada producto -->
+<script src="https://s3.amazonaws.com/widgets.addi.com/bundle.min.js" defer></script>
 </head>
 <body>
 
@@ -413,7 +415,8 @@
       <span id="cartTotal">$0 COP</span>
     </div>
     <button class="btn-checkout" onclick="checkoutWompi()">Pagar con Wompi</button>
-    <p class="checkout-note">Pago seguro con tarjeta, PSE o Nequi. Coordinamos el envío por WhatsApp después de tu compra.</p>
+    <button class="btn-checkout-addi" onclick="checkoutAddi()">🟠 Pagar en cuotas con Addi</button>
+    <p class="checkout-note">Pago seguro con tarjeta, PSE, Nequi o Addi. Coordinamos el envío por WhatsApp después de tu compra.</p>
   </div>
 </div>
 
@@ -425,6 +428,10 @@
     <div class="form-row">
       <label for="cf-nombre">Nombre completo</label>
       <input type="text" id="cf-nombre" placeholder="Tu nombre"/>
+    </div>
+    <div class="form-row" id="cf-cedula-field" style="display:none">
+      <label for="cf-cedula">Número de cédula (solo para pagar con Addi)</label>
+      <input type="text" id="cf-cedula" inputmode="numeric" placeholder="Ej: 1234567890"/>
     </div>
     <div class="form-row">
       <label for="cf-email">Correo</label>
