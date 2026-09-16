@@ -1,3 +1,28 @@
 {
-  "pedidos": []
+  "pedidos": [
+    {
+      "cliente": {
+        "nombre": "Berta Pastrana",
+        "cedula": "25909455",
+        "email": "bertatulia75@gmail.com",
+        "tel": "3015574398",
+        "dir": "Cra. 9 # 12-26, Chinú, Córdoba, Colombia",
+        "ciudad": "CHINÚ",
+        "depto": "cordoba"
+      },
+      "items": [
+        {
+          "nombre": "Cajas de Regalo Iluminadas",
+          "qty": 1,
+          "precio": 90000
+        }
+      ],
+      "total": 90000,
+      "metodo": "addi",
+      "addiOrderId": "c8540ff9-be0f-46fb-8b02-20d1c3cd4a30",
+      "id": "f924015e-bb50-49f6-9cb4-8bd0fc4074b9",
+      "fecha": "2026-09-16T02:41:28.940Z",
+      "estado": "pendiente_guia"
+    }
+  ]
 }
