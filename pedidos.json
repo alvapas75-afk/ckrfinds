@@ -22,7 +22,9 @@
       "addiOrderId": "c8540ff9-be0f-46fb-8b02-20d1c3cd4a30",
       "id": "f924015e-bb50-49f6-9cb4-8bd0fc4074b9",
       "fecha": "2026-09-16T02:41:28.940Z",
-      "estado": "pendiente_guia"
+      "estado": "addi_abandoned",
+      "addiApplicationId": "-a8ac-1af25bbac230",
+      "addiApprovedAmount": "0"
     }
   ]
 }
