@@ -141,7 +141,7 @@ function submitCustomerForm() {
     return;
   }
   if (_checkoutRequiereCedula && !cedula) {
-    alert('Para pagar con Addi necesitamos tu número de cédula.');
+    alert('Para pagar a crédito necesitamos tu número de cédula.');
     return;
   }
   const callback = _checkoutCallback; // guardar antes de cerrar, closeCustomerForm() lo pone en null
@@ -241,6 +241,57 @@ function addiIniciarCheckout(pedido) {
   setTimeout(() => {
     if (window[cbName]) { cleanup(); alert('Addi está tardando demasiado en responder. Intenta de nuevo en un momento.'); }
   }, 20000);
+}
+
+// ---- CHECKOUT CON SISTECREDITO ----
+function checkoutSistecredito() {
+  if (cart.length === 0) {
+    alert('Tu carrito está vacío. Agrega productos primero.');
+    return;
+  }
+  closeCart();
+  showCustomerForm(({ nombre, cedula, email, tel, dir, ciudad, depto }) => {
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    sistecreditoIniciarCheckout({
+      tienda: 'ckrfinds',
+      cliente: { nombre, cedula, email, tel, dir, ciudad, depto },
+      items: cart.map(i => ({ nombre: i.name, qty: i.qty, precio: i.price })),
+      total
+    });
+  }, true);
+}
+
+function sistecreditoIniciarCheckout(pedido) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;text-align:center;padding:20px;';
+  overlay.innerHTML = '<div>⏳ Conectando con Sistecrédito...<br><small style="opacity:.8">No cierres esta ventana</small></div>';
+  document.body.appendChild(overlay);
+
+  const cbName = 'sisteCb_' + Date.now();
+  const cleanup = () => {
+    const s = document.getElementById(cbName + '_script');
+    if (s) s.remove();
+    delete window[cbName];
+    overlay.remove();
+  };
+  window[cbName] = function (res) {
+    cleanup();
+    if (res && res.ok && res.redirectUrl) {
+      window.location.href = res.redirectUrl;
+    } else {
+      alert((res && res.error) || 'No se pudo iniciar el pago con Sistecrédito. Intenta de nuevo o elige otro método.');
+    }
+  };
+  const script = document.createElement('script');
+  script.id = cbName + '_script';
+  script.src = CKR_STOCK_WEBHOOK + '?accion=sistecredito_crear_transaccion'
+    + '&callback=' + encodeURIComponent(cbName)
+    + '&pedido=' + encodeURIComponent(JSON.stringify(pedido));
+  script.onerror = () => { cleanup(); alert('No se pudo conectar con Sistecrédito. Revisa tu conexión e intenta de nuevo.'); };
+  document.body.appendChild(script);
+  setTimeout(() => {
+    if (window[cbName]) { cleanup(); alert('Sistecrédito está tardando demasiado en responder. Intenta de nuevo en un momento.'); }
+  }, 45000);
 }
 
 // ---- WIDGET DE CUOTAS ADDI EN PRODUCTOS ----

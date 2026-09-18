@@ -177,6 +177,11 @@ footer .wa-link{
   color:#fff;font-weight:700;font-size:.92rem;cursor:pointer;
 }
 .btn-checkout-addi:hover{background:#e04e00;}
+.btn-checkout-siste{
+  width:100%;padding:14px;border:none;border-radius:10px;background:#2ea043;margin-top:10px;
+  color:#fff;font-weight:700;font-size:.92rem;cursor:pointer;
+}
+.btn-checkout-siste:hover{background:#23863a;}
 .checkout-note{font-size:.72rem;color:var(--sub);text-align:center;margin-top:10px;line-height:1.5;}
 
 /* ===== ADDI WIDGET — Cuotas en producto ===== */
